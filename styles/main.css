@@ -1,0 +1,57 @@
+body {
+    background-image: url(images/light-1282314_1920.jpg), linear-gradient(rgba(245, 245, 245, .9), rgba(245, 245, 245, 0.1), rgba(245, 245, 245, 0.1));
+    background-size: cover;
+}
+
+.searchInput{
+height: 38.5px;
+border: 1px solid #4f5467;
+background-color: transparent;
+}
+
+.box {
+    height: 350px;
+    width: 300px;
+    border: 5px solid #4f5467;
+    border-radius: 5%;
+    background-color: transparent;
+}
+
+/*
+.cityName{
+text-decoration: dotted underline;
+}
+*/
+
+.icon {
+    height: 80px;
+    width:90px ;
+}
+
+.boxTop {
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boxMiddle {
+    height: 35%;
+    display: flex;
+     align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.boxBottom {
+    height: 35%;
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.weatherDescription{
+text-transform: capitalize;
+}
+
