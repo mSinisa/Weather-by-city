@@ -12,7 +12,8 @@ var app = new Vue({
         url: "",
         city: "Barcelona",
         dataWeather: [],
-        weatherForecast:[]
+        weatherForecast: [],
+        fiveDays: false
 
 
 
@@ -42,7 +43,8 @@ var app = new Vue({
                     return data.json();
                 })
                 .then(function (myData) {
-                app.weatherForecast = myData.list;
+                    app.weatherForecast = myData.list;
+
                 })
 
         },
@@ -73,6 +75,19 @@ var app = new Vue({
             } else if (description.match(/50d/g) || description.match(/50n/g)) {
                 return "styles/images/haze.png";
             }
+        },
+
+        fiveDayForecast: function () {
+            var every24hrs = [];
+            for (var i = 0; i < this.weatherForecast.length; i += 8) {
+                every24hrs.push(this.weatherForecast[i]);
+            }
+            return every24hrs;
+        },
+
+        showAndHide: function () {
+            //   document.getElementById("forecastBox").style.display = "";
+            // document.getElementById("forecastBox").style.classList.toggle = "invisible";
         }
 
 
@@ -80,11 +95,14 @@ var app = new Vue({
 
     computed: {
 
+
     },
 
     created: function () {
         this.getData();
         this.getForecast();
+        //document.getElementById("forecastBox").style.display = "none";
+
     }
 
 })

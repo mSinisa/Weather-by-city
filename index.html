@@ -9,27 +9,51 @@
 
 <body>
     <div class="container-fluid" id="app">
-        <h2 class="display-4 text-center">Weather App</h2>
-        <div class="d-flex justify-content-center mt-3 mb-5">
+        <h1 class="text-center mt-3">City Weather</h1>
+        <div class="d-flex justify-content-center mb-5">
             <form class="form-inline my-2 my-lg-0" onSubmit="return false">
                 <input v-model="city" class="form-control mr-sm-3 searchInput" type="text" placeholder="Search for city" v-on:keyup.enter="getData"><button class="btn btn-outline-dark" type="button" v-on:click="getData">Search</button>
             </form>
         </div>
+
         <div class="cityDisplay d-flex justify-content-center" v-if="dataWeather.length != 0">
-        <div class="box">
-        <div class="boxTop">
-            <h1 class="cityName">{{dataWeather.name}}</h1>
-                
+            <div class="box">
+                <div class="boxTop">
+                    <h1 class="cityName">{{dataWeather.name}}</h1>
+                </div>
+                <div class="boxMiddle row">
+                    <div class="middle-left">
+                        <p>Min. Temperature: {{dataWeather.main.temp_min}}&#176; </p>
+                        <p>Wind: {{dataWeather.wind.speed}} km/h</p>
+                    </div>
+                    <div class="middle-middle">
+                        <h1 class="temperature">{{dataWeather.main.temp}}&#176;</h1>
+                        <img class="icon" v-bind:src="getIcon(dataWeather.weather[0].icon)">
+                        <p class="weatherDescription">{{dataWeather.weather[0].description}}</p>
+                    </div>
+                    <div class="middle-right">
+                        <p>Max. Temperature: {{dataWeather.main.temp_max}}&#176; </p>
+                        <p>Humidity: {{dataWeather.main.humidity}} %</p>
+                    </div>
+                </div>
+                <div class="boxBottom">
+                    <button id="forecastButton" class="btn btn-dark" type="button" v-on:click="fiveDays = !fiveDays">5 Day Forecast</button>
+                </div>
+            </div>
         </div>
-        <div class="boxMiddle">         
-            <h1 class="temperature">{{dataWeather.main.temp}}&#176;</h1>       
-               <p>{{dataWeather.main.temp_min}}&#176; / {{dataWeather.main.temp_max}}&#176;</p>     
-        </div>
-        <div class="boxBottom">
-             <img class="icon" v-bind:src="getIcon(dataWeather.weather[0].icon)"> 
-             <p class="weatherDescription">{{dataWeather.weather[0].description}}</p>
-        </div>
-        </div>
+
+        <div  class="forecastDisplay d-flex justify-content-center mb-5" v-if="fiveDays">
+            <div id="forecastBox" class="box">
+                <div class="eachDay" v-for="day in fiveDayForecast()">
+                    <h2>{{day.main.temp}}&#176;</h2>
+                    <p>{{day.main.temp_min}}&#176; / {{day.main.temp_max}}&#176;</p>
+                    <img class="iconForecast mb-2" v-bind:src="getIcon(day.weather[0].icon)">
+                    <p class="weatherDescription">{{day.weather[0].description}}</p>
+                    <p>Wind: {{day.wind.speed}} km/h</p>
+                    <p>Humidity: {{day.main.humidity}} %</p>
+                </div>
+
+            </div>
         </div>
 
 
