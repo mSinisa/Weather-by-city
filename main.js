@@ -36,7 +36,7 @@ var app = new Vue({
         },
 
         getForecast: function () {
-            fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + this.city + "&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9", {
+            fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + this.city + "&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9", {
                     method: "GET",
                 })
                 .then(function (data) {
