@@ -12,7 +12,8 @@
         <h1 class="text-center mt-3">City Weather</h1>
         <div class="d-flex justify-content-center mb-5">
             <form class="form-inline my-2 my-lg-0" onSubmit="return false">
-                <input v-model="city" class="form-control mr-sm-3 searchInput" type="text" placeholder="Search for city" v-on:keyup.enter="getData"><button class="btn btn-outline-dark" type="button" v-on:click="getData">Search</button>
+                <input v-model="city" class="form-control mr-sm-3 searchInput" type="text" placeholder="Search for city" v-on:keyup.enter="getData">
+                <button class="btn btn-outline-dark" type="button" v-on:click="getData">Search</button>
             </form>
         </div>
 
@@ -55,7 +56,6 @@
 
             </div>
         </div>
-
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

@@ -3,20 +3,12 @@ var app = new Vue({
     el: "#app",
 
     data: {
-        //&APPID=2f3c378e991f5719f81ce9b07aaf6bb9
-        //"http://api.openweathermap.org/data/2.5/weather?q=' + city +'&APPID=2f3c378e991f5719f81ce9b07aaf6bb9"
-        //        url: "http://api.openweathermap.org/data/2.5/weather?q= ' + city + ' &APPID=2f3c378e991f5719f81ce9b07aaf6bb9",
-        //        url: "https://api.myjson.com/bins/i8run&APPID=2f3c378e991f5719f81ce9b07aaf6bb9",
-        //        url: "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=2f3c378e991f5719f81ce9b07aaf6bb9",
-        //        url: "https://api.myjson.com/bins/i8run&APPID=2f3c378e991f5719f81ce9b07aaf6bb9",
+
         url: "",
         city: "Barcelona",
         dataWeather: [],
         weatherForecast: [],
         fiveDays: false
-
-
-
     },
 
     methods: {
@@ -25,6 +17,12 @@ var app = new Vue({
             fetch("https://api.openweathermap.org/data/2.5/weather?q=" + this.city + "&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9", {
                     method: "GET",
                 })
+                .then(function (res) {
+                    if (!res.ok) {
+                        throw Error(res.status);
+                    }
+                    return res;
+                })
                 .then(function (data) {
                     return data.json();
                 })
@@ -32,21 +30,30 @@ var app = new Vue({
                     app.dataWeather = myData;
                     app.city = ""
                 })
-            //            .catch
+                .catch(function (err) {
+                    console.log(err);
+                })
         },
 
         getForecast: function () {
             fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + this.city + "&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9", {
                     method: "GET",
                 })
+                .then(function (res) {
+                    if (!res.ok) {
+                        throw Error(res.status);
+                    }
+                    return res;
+                })
                 .then(function (data) {
                     return data.json();
                 })
                 .then(function (myData) {
                     app.weatherForecast = myData.list;
-
                 })
-
+                .catch(function (err) {
+                    console.log(err);
+                })
         },
 
         getIcon: function (description) {
@@ -83,26 +90,17 @@ var app = new Vue({
                 every24hrs.push(this.weatherForecast[i]);
             }
             return every24hrs;
-        },
-
-        showAndHide: function () {
-            //   document.getElementById("forecastBox").style.display = "";
-            // document.getElementById("forecastBox").style.classList.toggle = "invisible";
         }
-
 
     },
 
     computed: {
-
 
     },
 
     created: function () {
         this.getData();
         this.getForecast();
-        //document.getElementById("forecastBox").style.display = "none";
-
     }
 
 })
