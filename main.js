@@ -1,4 +1,4 @@
-var app = new Vue({
+const app = new Vue({
 
     el: "#app",
 
@@ -13,8 +13,8 @@ var app = new Vue({
 
     methods: {
 
-        getData: function () {
-            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + this.city + "&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9", {
+        getData () {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9`, {
                     method: "GET",
                 })
                 .then(function (res) {
@@ -35,8 +35,8 @@ var app = new Vue({
                 })
         },
 
-        getForecast: function () {
-            fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + this.city + "&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9", {
+        getForecast() {
+            fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9`, {
                     method: "GET",
                 })
                 .then(function (res) {
@@ -56,7 +56,7 @@ var app = new Vue({
                 })
         },
 
-        getIcon: function (description) {
+        getIcon(description) {
             if (description.match(/01d/g)) {
                 return "styles/images/sun.png";
             } else if (description.match(/01n/g)) {
@@ -84,9 +84,9 @@ var app = new Vue({
             }
         },
 
-        fiveDayForecast: function () {
-            var every24hrs = [];
-            for (var i = 0; i < this.weatherForecast.length; i += 8) {
+        fiveDayForecast () {
+            let every24hrs = [];
+            for (let i = 0; i < this.weatherForecast.length; i += 8) {
                 every24hrs.push(this.weatherForecast[i]);
             }
             return every24hrs;
@@ -98,7 +98,7 @@ var app = new Vue({
 
     },
 
-    created: function () {
+    created() {
         this.getData();
         this.getForecast();
     }
