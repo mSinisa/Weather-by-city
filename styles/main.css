@@ -1,6 +1,7 @@
 body {
     background-image: url(images/light-1282314_1920.jpg), linear-gradient(rgba(245, 245, 245, .9), rgba(245, 245, 245, 0.1), rgba(245, 245, 245, 0.1));
     background-size: cover;
+    font-family: 'Staatliches', cursive;
 }
 
 .searchInput {
@@ -18,11 +19,10 @@ body {
     background-color: transparent;
 }
 
-/*
-.cityName{
-text-decoration: dotted underline;
-}
-*/
+#searchBtn.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
 
 .icon {
     height: 80px;

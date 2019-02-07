@@ -17,21 +17,25 @@ const app = new Vue({
             fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9`, {
                     method: "GET",
                 })
-                .then(function (res) {
+                .then(res => {
                     if (!res.ok) {
                         throw Error(res.status);
                     }
                     return res;
                 })
-                .then(function (data) {
+                .then(data => {
                     return data.json();
                 })
-                .then(function (myData) {
+                .then(myData => {
                     app.dataWeather = myData;
                     app.city = ""
                 })
-                .catch(function (err) {
-                    console.log(err);
+                .catch(err => {
+                   if(err.message == 404){
+                       document.getElementById("searchInput").value="";
+                       document.getElementById("mainHeader").innerText = "City Not Found. Check Spelling Please";
+                       setTimeout(() => document.getElementById("mainHeader").innerText = "City Weather", 3000);
+                   }
                 })
         },
 
@@ -39,19 +43,19 @@ const app = new Vue({
             fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&units=metric&APPID=2f3c378e991f5719f81ce9b07aaf6bb9`, {
                     method: "GET",
                 })
-                .then(function (res) {
+                .then(res => {
                     if (!res.ok) {
                         throw Error(res.status);
                     }
                     return res;
                 })
-                .then(function (data) {
+                .then(data => {
                     return data.json();
                 })
-                .then(function (myData) {
+                .then(myData => {
                     app.weatherForecast = myData.list;
                 })
-                .catch(function (err) {
+                .catch(err => {
                     console.log(err);
                 })
         },
